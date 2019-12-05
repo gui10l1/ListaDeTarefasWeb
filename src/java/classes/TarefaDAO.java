@@ -14,7 +14,7 @@ public class TarefaDAO {
         ArrayList<Tarefa> tarefas = new ArrayList();
         
         try(Connection conn = Conexao.abrirConexao()){
-            PreparedStatement stmnt = conn.prepareStatement("select * from db_listadetarefas_tb_tarefas where id_usuario = ?");
+            PreparedStatement stmnt = conn.prepareStatement("select * from db_listadetarefas.tb_tarefas where id_usuario = ?");
             
             stmnt.setInt(1, u.getId());
             
@@ -40,5 +40,70 @@ public class TarefaDAO {
         }
         
         return tarefas;
+    }
+    
+    public static boolean inserirTarefa(Tarefa t){
+        boolean sucesso = false;
+        
+        try(Connection conn = Conexao.abrirConexao()){
+            PreparedStatement stmnt = conn.prepareStatement("INSERT INTO db_listadetarefas.tb_tarefas (des_assunto, id_usuario) values (?, ?)");
+            
+            stmnt.setString(1, t.getAssunto());
+            stmnt.setInt(2, t.getIdUsuario());
+            
+            int linhas = stmnt.executeUpdate();
+            
+            if(linhas > 0){
+                sucesso = true;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        
+        return sucesso;
+    }
+    
+    public static boolean finalizarTarefa(Tarefa t){
+        boolean sucesso = false;
+        
+        try(Connection conn = Conexao.abrirConexao()){
+            PreparedStatement stmnt = conn.prepareStatement("UPDATE db_listadetarefas.tb_tarefas SET sta_finalizada = true WHERE id_tarefa = ? and id_usuario = ?");
+            
+            stmnt.setInt(1, t.getId());
+            stmnt.setInt(2, t.getIdUsuario());
+            
+            int linhas = stmnt.executeUpdate();
+            
+            if(linhas > 0){
+                sucesso = true;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        
+        return sucesso;
+    }
+    
+    public static boolean removerTarefa(Tarefa t){
+        boolean sucesso = false;
+        
+        try(Connection conn = Conexao.abrirConexao()){
+            
+            PreparedStatement stmnt = conn.prepareStatement("DELETE from db_listadetarefas.tb_tarefas WHERE id_usuario = ? and id_tarefa = ?");
+            
+            stmnt.setInt(1, t.getIdUsuario());
+            stmnt.setInt(2, t.getId());
+            
+            int linhas = stmnt.executeUpdate();
+            
+            if(linhas > 0){
+                sucesso = true;
+            }
+            
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        
+        return sucesso;
     }
 }
