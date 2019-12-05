@@ -15,9 +15,12 @@
         <title>Lista de tarefas</title>
     </head>
     <body>
-        <a href="LogoutServlet">Fazer logout</a>
-        <h1>Olá, seja bem-vindo ${usuario.email}</h1>
 
+        <h1>Lista de tarefas de ${usuario.email}</h1>
+
+        <hr>
+
+        <h2>Adicionar tarefas</h2>
         <form action="AdicionarServlet" method="POST">
             <p>
                 <label>Titulo</label>
@@ -29,37 +32,44 @@
             <p>${erro}</p>
         </form>
 
-    <c:if test="${tarefas.size() > 0}">
-        <h2>Lista de Tarefas</h2>
-        <form action="FinalizarServlet" method="POST">
-            <c:forEach items="${tarefas}" var="t">
-                <p>
-                <input type="checkbox" value="${t.id}" name="idtarefas"> ${t.assunto} (<c:if test="${t.finalizada}">Finalizada</c:if> <c:if test="${!t.finalizada}">Em aberto</c:if>)
-            </c:forEach>
-            </p>
-            <p>
-                <input type="submit" value="Finalizar tarefa">
-            </p>
-        </form>
-
         <hr>
 
-        <h2>Remover tarefas</h2>
-        <form action="RemoverServlet" method="POST">
-            <c:forEach items="${tarefas}" var="t">
+        <c:if test="${tarefas.size() > 0}">
+            <h2>Lista de Tarefas</h2>
+            <form action="FinalizarServlet" method="POST">
+                <c:forEach items="${tarefas}" var="t">
+                    <p>
+                        <input type="checkbox" value="${t.id}" name="idtarefas"> ${t.assunto} (<c:if test="${t.finalizada}">Finalizada</c:if> <c:if test="${!t.finalizada}">Em aberto</c:if>)
+                    </c:forEach>
+                </p>
                 <p>
-                <input type="checkbox" value="${t.id}" name="remover"> ${t.assunto} (<c:if test="${t.finalizada}">Finalizada</c:if> <c:if test="${!t.finalizada}">Em aberto</c:if>)
-            </c:forEach>
-            </p>
+                    <input type="submit" value="Finalizar tarefa">
+                </p>
+            </form>
+
+            <hr>
+
+            <h2>Remover tarefas</h2>
+            <form action="RemoverServlet" method="POST">
+                <c:forEach items="${tarefas}" var="t">
+                    <p>
+                        <input type="checkbox" value="${t.id}" name="remover"> ${t.assunto} (<c:if test="${t.finalizada}">Finalizada</c:if> <c:if test="${!t.finalizada}">Em aberto</c:if>)
+                    </c:forEach>
+                </p>
+                <p>
+                    <input type="submit" value="Remover tarefa">
+                </p>
+            </form>
+        </c:if>
+
+        <c:if test="${tarefas.size() == 0}"><h2>Sua lista de tarefas está vazia!</h2></c:if>
+
+
+        <hr>
+        <form action="LogoutServlet" method="GET">
             <p>
-                <input type="submit" value="Remover tarefa">
+                <button>Fazer logout</button>
             </p>
         </form>
-    </c:if>
-
-    <c:if test="${tarefas.size() == 0}"><h2>Sua lista de tarefas está vazia!</h2></c:if>
-
-
-
-</body>
+    </body>
 </html>
