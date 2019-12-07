@@ -5,7 +5,6 @@
  */
 package servletsUsuario;
 
-
 import classes.UsuarioDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -31,9 +30,6 @@ public class CadastroServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -59,24 +55,31 @@ public class CadastroServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         //Variáveis
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        
+
         Usuario u = new Usuario();
         u.setEmail(email);
         u.setSenha(senha);
-               
+
         //Lógica
+        if (u.getEmail().equals("") || u.getSenha().equals("")) {
+            request.setAttribute("erro2", "Os campos não podem estar vazios!");
+            request.getRequestDispatcher("cadastro.jsp").forward(request, response);
+            return;
+        }
+
         boolean inserido = UsuarioDAO.inserirUsuario(u);
-        
-        if(inserido){
-            request.getRequestDispatcher("cadastroSucesso.jsp").forward(request, response);
-        }else{
-            request.setAttribute("erro", "Algum erro aconteceu");
+
+        if (inserido) {
+            request.getRequestDispatcher("WEB-INF/cadastroSucesso.jsp").forward(request, response);
+        } else {
+            request.setAttribute("erro", "Algum erro aconteceu!");
             request.getRequestDispatcher("cadastro.jsp").forward(request, response);
         }
+
     }
 
     /**

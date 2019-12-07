@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    padding: 0;  
+}
+.titulo{
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+}
+.titulo-login{
+    font-size: 25px;
+    text-align: left !important;
+}
+.panel{
+    margin: auto;
+    width: 600px;
+}
