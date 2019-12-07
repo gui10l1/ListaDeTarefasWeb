@@ -62,7 +62,16 @@ public class CadastroServlet extends HttpServlet {
 
         Usuario u = new Usuario();
         u.setEmail(email);
-        u.setSenha(senha);
+        
+        if(senha.length() < 6 || senha.length() > 15){
+            request.setAttribute("erroSenha", "A senha deve conter entre 6 e 15 caracteres");
+            request.getRequestDispatcher("cadastro.jsp").forward(request, response);
+            return;
+        }else{
+            u.setSenha(senha);
+        }
+        
+        
 
         //Lógica
         if (u.getEmail().equals("") || u.getSenha().equals("")) {
