@@ -24,28 +24,6 @@ import modelo.Usuario;
 @WebServlet(name = "RemoverServlet", urlPatterns = {"/RemoverServlet"})
 public class RemoverServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -62,7 +40,7 @@ public class RemoverServlet extends HttpServlet {
 
         Usuario u = (Usuario) session.getAttribute("usuario");
 
-        String[] tarefas = request.getParameterValues("remover");
+        String[] tarefas = request.getParameterValues("idtarefas");
 
         boolean erro = false;
 

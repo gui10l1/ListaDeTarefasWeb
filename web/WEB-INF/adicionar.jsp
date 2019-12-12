@@ -54,24 +54,11 @@
                     </div>
                 </div>
 
-                <table class="table">
-                    <thead class="thead-light">
-                        <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Título</th>
-                            <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:forEach items="${tarefas}" var="t">
-                            <tr>
-                                <th scope="row">${t.id}</th>
-                                <td>${t.assunto}</td>
-                                <td><c:if test="${t.finalizada}">Finalizada</c:if> <c:if test="${!t.finalizada}">Em aberto</c:if></td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
-                </table>
+                <c:if test="${tarefas.size() > 0}">
+                    <%@include file="jspf/table.jsp"%>
+                </c:if>
+                
+                <c:if test="${tarefas.size() == 0}"><h2 class="text-center">Sua lista de tarefas está vazia!</h2></c:if>
 
                 <div class="row">
                     <div class="form-group">

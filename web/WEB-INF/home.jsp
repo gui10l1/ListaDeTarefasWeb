@@ -50,26 +50,7 @@
             <c:if test="${tarefas.size() > 0}">
                 <h2>Lista de Tarefas</h2>
                 <form action="FinalizarServlet" method="POST">
-                    <table class="table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Título</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Finalizar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <c:forEach items="${tarefas}" var="t">
-                                <tr>
-                                    <th scope="row">${t.id}</th>
-                                    <td>${t.assunto}</td>
-                                    <td><c:if test="${t.finalizada}">Finalizada</c:if> <c:if test="${!t.finalizada}">Em aberto</c:if></td>
-                                    <td><input type="checkbox" value="${t.id}" name="idtarefas"></td>
-                                </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                    <%@include file="jspf/table.jsp"%>
                     <div class="form-group">
                         <button type="submit" class="btn btn-danger">Finalizar tarefa</button>
                     </div>

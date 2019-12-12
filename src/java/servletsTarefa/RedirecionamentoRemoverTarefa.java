@@ -47,11 +47,6 @@ public class RedirecionamentoRemoverTarefa extends HttpServlet {
 
         Usuario u = (Usuario) session.getAttribute("usuario");
 
-        if (u == null) {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-            return;
-        }
-
         ArrayList<Tarefa> tarefas = TarefaDAO.buscarTarefaDoUsusario(u);
         u.setTarefas(tarefas);
 

@@ -25,7 +25,7 @@
                     <form action="CadastroServlet" method="POST">
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" name="email" class="form-control" placeholder="Seu email para cadastro aqui">
+                            <input type="email" name="email" class="form-control" placeholder="Seu email para cadastro aqui">
                         </div>
 
                         <div class="form-group">
@@ -45,6 +45,9 @@
                     </c:if>
                     <c:if test="${erro2.length() > 0}"> 
                         <p class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>  ${erro2} </p>
+                    </c:if>
+                    <c:if test="${erroSenha.length() > 0}"> 
+                        <p class="alert alert-danger"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>  ${erroSenha} </p>
                     </c:if>
                     <a href="index.jsp" class="text-primary">Voltar</a>
                 </div>
